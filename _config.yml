@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: caijingwei
+title: HappyWriting
 subtitle: ''
-description: ''
+description: '记录、学习'
 keywords:
-author: Luke
+author: Arun
 language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://github.com/jingwei-cai
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
