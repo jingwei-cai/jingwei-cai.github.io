@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Flex 用法初解前言前端各端的迅速发展，促使了CSS样式的广泛使用，样式场景效果的创新也是种类繁多；其中布局对于需求的创新与实现起到了关键性的作用，不过往往有一些布局使用传统的方式得到的效果不尽人意；对此2009年，W3C提出了一种新的方案，即 Flex 布局，它可以简便、迅速、完整、响应式的实现各种页面布局；继续往下阅读了解它与传统布局的差别吧。目前它已经得到了所有浏览器的支持，意味着现在能很">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HappyWriting">
+<meta property="og:url" content="https://github.com/jingwei-cai/2020/08/19/Flex/index.html">
+<meta property="og:site_name" content="HappyWriting">
+<meta property="og:description" content="Flex 用法初解前言前端各端的迅速发展，促使了CSS样式的广泛使用，样式场景效果的创新也是种类繁多；其中布局对于需求的创新与实现起到了关键性的作用，不过往往有一些布局使用传统的方式得到的效果不尽人意；对此2009年，W3C提出了一种新的方案，即 Flex 布局，它可以简便、迅速、完整、响应式的实现各种页面布局；继续往下阅读了解它与传统布局的差别吧。目前它已经得到了所有浏览器的支持，意味着现在能很">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1589616855713-fcf0b636-a6df-4545-a10f-216b0a0165ed.png#align=left&display=inline&height=317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=317&originWidth=899&size=114244&status=done&style=none&width=899">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1589615144728-d74a0672-2478-4f24-afe6-b78410d59ca6.png#align=left&display=inline&height=349&margin=%5Bobject%20Object%5D&name=image.png&originHeight=352&originWidth=403&size=104466&status=done&style=none&width=400">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1589622159730-d51e94de-f900-4178-82bd-7a994f4f0332.png#align=left&display=inline&height=333&margin=%5Bobject%20Object%5D&name=image.png&originHeight=333&originWidth=563&size=31056&status=done&style=none&width=563">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1589774877409-7731bf74-4914-4cbb-b8ac-7a41e9ba3b20.png#align=left&display=inline&height=198&margin=%5Bobject%20Object%5D&name=flex-direction.png&originHeight=198&originWidth=743&size=14518&status=done&style=none&width=743">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1591669745727-84ae7aa7-87e0-43a6-ab1a-81a10f09beb0.png#align=left&display=inline&height=147&margin=%5Bobject%20Object%5D&name=flex-wrap.png&originHeight=147&originWidth=729&size=16032&status=done&style=none&width=729">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1591670906245-d0047faf-e496-4099-9a7a-678f1088b505.png#align=left&display=inline&height=252&margin=%5Bobject%20Object%5D&name=justify-content.png&originHeight=252&originWidth=729&size=16930&status=done&style=none&width=729">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1591673827328-00f3a848-dd3b-45a1-aede-ce58628d2b8f.png#align=left&display=inline&height=323&margin=%5Bobject%20Object%5D&name=align-items.png&originHeight=323&originWidth=745&size=19790&status=done&style=none&width=745">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1591675142916-6295ea7f-4b69-4f60-825d-faacf38a2a89.png#align=left&display=inline&height=378&margin=%5Bobject%20Object%5D&name=align-content.png&originHeight=378&originWidth=744&size=21451&status=done&style=none&width=744">
+<meta property="article:published_time" content="2020-08-19T02:38:23.624Z">
+<meta property="article:modified_time" content="2020-08-19T02:38:23.624Z">
+<meta property="article:author" content="Arun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/315380/1589616855713-fcf0b636-a6df-4545-a10f-216b0a0165ed.png#align=left&display=inline&height=317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=317&originWidth=899&size=114244&status=done&style=none&width=899">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>HappyWriting</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/jingwei-cai/2020/08/19/Flex/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/jingwei-cai/2020/08/19/Flex/&text="><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/jingwei-cai/2020/08/19/Flex/&is_video=false&description="><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: https://github.com/jingwei-cai/2020/08/19/Flex/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/jingwei-cai/2020/08/19/Flex/&name=&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/jingwei-cai/2020/08/19/Flex/&t="><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex-%E7%94%A8%E6%B3%95%E5%88%9D%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Flex 用法初解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFFlex%E5%B8%83%E5%B1%80"><span class="toc-number">1.0.2.</span> <span class="toc-text">什么是Flex布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.0.3.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.4.</span> <span class="toc-text">容器属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-direction"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">flex-direction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-wrap"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">flex-wrap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-flow"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#justify-content"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">justify-content</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-items"><span class="toc-number">1.0.4.5.</span> <span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-content"><span class="toc-number">1.0.4.6.</span> <span class="toc-text">align-content</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.5.</span> <span class="toc-text">项目属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#order"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-grow"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">flex-grow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-shrink"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">flex-shrink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-basis"><span class="toc-number">1.0.5.4.</span> <span class="toc-text">flex-basis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex"><span class="toc-number">1.0.5.5.</span> <span class="toc-text">flex</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-self"><span class="toc-number">1.0.5.6.</span> <span class="toc-text">align-self</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.0.6.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">HappyWriting</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-08-19T02:38:23.624Z" itemprop="datePublished">2020-08-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Flex-用法初解"><a href="#Flex-用法初解" class="headerlink" title="Flex 用法初解"></a>Flex 用法初解</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前端各端的迅速发展，促使了CSS样式的广泛使用，样式场景效果的创新也是种类繁多；其中布局对于需求的创新与实现起到了关键性的作用，不过往往有一些布局使用传统的方式得到的效果不尽人意；对此2009年，W3C提出了一种新的方案，即 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF_%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90">Flex</a> 布局，它可以简便、迅速、完整、响应式的实现各种页面布局；继续往下阅读了解它与传统布局的差别吧。目前它已经得到了所有浏览器的支持，意味着现在能很安全的使用这项功能：<img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1589616855713-fcf0b636-a6df-4545-a10f-216b0a0165ed.png#align=left&display=inline&height=317&margin=%5Bobject%20Object%5D&name=image.png&originHeight=317&originWidth=899&size=114244&status=done&style=none&width=899" alt="image.png"><br>相比于传统布局：<br><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1589615144728-d74a0672-2478-4f24-afe6-b78410d59ca6.png#align=left&display=inline&height=349&margin=%5Bobject%20Object%5D&name=image.png&originHeight=352&originWidth=403&size=104466&status=done&style=none&width=400" alt="image.png"><br>传统布局的解决方式基于盒状模形，依赖于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">position</a> + <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">float</a> 属性；这些属性是唯一可靠且跨浏览器兼容的，不过该属性在特定的一些场景使用不尽人意。比如：</p>
+<ul>
+<li>在父元素里面垂直居中一个块内容。</li>
+<li>使容器的所有子项占用等量的可用宽度/高度，而不管有多少宽度/高度可用。</li>
+<li>使多列布局中的所有列采用相同的高度，即使它们包含的内容量不同。</li>
+</ul>
+<p>后续在学习使用 Flex 弹性盒子时，你会发现这类布局问题能简单并高效的解决</p>
+<h3 id="什么是Flex布局"><a href="#什么是Flex布局" class="headerlink" title="什么是Flex布局"></a>什么是Flex布局</h3><ul>
+<li>Flex 布局（全称：FlexiableBox，又名弹性盒子）</li>
+<li>它定义了针对用户界面设计和一维项目布局而优化的CSS框模型，用来为盒状模型提供最大的灵活性。</li>
+<li>在flex布局模型中，flex容器的子元素可以在任何方向上进行布局，并且可以“伸缩”它们的大小，既可以增长以填充未使用的空间，也可以收缩以防止父元素溢出。并且子元素的水平和垂直对齐都可以轻松操纵。</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>采用 Flex 布局的元素，被称为 Flex 容器（flex container），简称：容器；它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称：项目。如下图：<br> <img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1589622159730-d51e94de-f900-4178-82bd-7a994f4f0332.png#align=left&display=inline&height=333&margin=%5Bobject%20Object%5D&name=image.png&originHeight=333&originWidth=563&size=31056&status=done&style=none&width=563" alt="image.png"><br>容器默认存在两条轴线：</p>
+<ul>
+<li>水平的主轴（main axis）与垂直的交叉轴（cross axis）</li>
+<li>主轴的开始位置（main start）与结束位置（main end）</li>
+<li>交叉轴的开始位置（sross start）与结束位置（cross end）</li>
+<li>项目默认沿主轴排列<ul>
+<li>单个项目占据的主轴空间（main size）</li>
+<li>单个项目占据的交叉轴空间（sross size）</li>
+</ul>
+</li>
+</ul>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li><code>flex-direction</code></li>
+<li><code>flex-wrap</code></li>
+<li><code>flex-flow</code></li>
+<li><code>justify-content</code></li>
+<li><code>align-items</code></li>
+<li><code>align-content</code></li>
+</ul>
+<p>容器有以上六个属性，下面来详解每个属性：</p>
+<h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><ul>
+<li>说明：该属性决定主轴的方向（即项目排列的方向）</li>
+<li>用法：<code>.box &#123; flex-direction: row | row-reverse | column | column-reverse; &#125;</code></li>
+<li>属性值：<ul>
+<li><code>row（默认）：主轴为水平方向，起点为左端</code></li>
+<li><code>row-reverse：主轴为水平方向，起点为右端</code></li>
+<li><code>column：主轴为垂直方向，起点为上沿</code></li>
+<li><code>column-severse：主轴为垂直方向，起点为下沿</code></li>
+</ul>
+</li>
+<li>效果（对应属性值）：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1589774877409-7731bf74-4914-4cbb-b8ac-7a41e9ba3b20.png#align=left&display=inline&height=198&margin=%5Bobject%20Object%5D&name=flex-direction.png&originHeight=198&originWidth=743&size=14518&status=done&style=none&width=743" alt="flex-direction.png"></p>
+<h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><ul>
+<li>说明：项目默认情况下排在一条轴线；该属性定义如果一条轴线排不下时该如何换行</li>
+<li>用法：<code>.box &#123; flew-wrap: nowrap | wrap | wrap-severse; &#125;</code></li>
+<li>属性值：<ul>
+<li>nowrap（默认）：不换行</li>
+<li>wrap：换行，从上至下，第一行在上方</li>
+<li>wrap-severse：换行，从下至上，第一行在下方</li>
+</ul>
+</li>
+<li>效果（对应属性值）：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1591669745727-84ae7aa7-87e0-43a6-ab1a-81a10f09beb0.png#align=left&display=inline&height=147&margin=%5Bobject%20Object%5D&name=flex-wrap.png&originHeight=147&originWidth=729&size=16032&status=done&style=none&width=729" alt="flex-wrap.png"></p>
+<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><ul>
+<li>说明：该属性为<code>flex-direction</code>与<code>flex-wrap</code>属性的复合属性</li>
+<li>用法：<code>.box &#123; row nowrap; &#125; 参考复合中的属性组合使用</code></li>
+<li>属性值：默认 row nowrap</li>
+</ul>
+<h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><ul>
+<li>说明：该属性定义了项目在主轴上的对齐方式</li>
+<li>用法：<code>.box &#123; justify-content: flex-start | flex-end | center | space-between | space-around; &#125;</code></li>
+<li>属性值：<ul>
+<li>flex-start（默认）：左对齐</li>
+<li>flex-end：右对齐</li>
+<li>center：居中</li>
+<li>space-between：两端对齐，项目中间间隔相等</li>
+<li>apace-around：每个项目两端相等（注意项目项目之间的间距比项目与边框之间的间距大一倍）</li>
+</ul>
+</li>
+<li>效果（对应属性值）：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1591670906245-d0047faf-e496-4099-9a7a-678f1088b505.png#align=left&display=inline&height=252&margin=%5Bobject%20Object%5D&name=justify-content.png&originHeight=252&originWidth=729&size=16930&status=done&style=none&width=729" alt="justify-content.png"></p>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><ul>
+<li>说明：该属性定义项目在交叉轴上的对齐方式</li>
+<li>用法：<code>.box &#123; align-items: stretch | flex-start | flex-end | center | baseline; &#125;</code></li>
+<li>属性值：<ul>
+<li>stretch（默认）：项目未设置高度或者auto，将占满整个容器的高度</li>
+<li>flex-start：交叉轴上沿对齐</li>
+<li>flex-end：交叉轴下沿对齐</li>
+<li>center：交叉轴居中对齐</li>
+<li>baseline：项目的第一行文本基线对齐</li>
+</ul>
+</li>
+<li>效果（对应属性值）：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1591673827328-00f3a848-dd3b-45a1-aede-ce58628d2b8f.png#align=left&display=inline&height=323&margin=%5Bobject%20Object%5D&name=align-items.png&originHeight=323&originWidth=745&size=19790&status=done&style=none&width=745" alt="align-items.png"></p>
+<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><ul>
+<li>说明：该属于定义了多条轴线的对齐方式（如果只有一条轴线，那么该属性不生效）</li>
+<li>用法：<code>.box &#123; align-content: stretch | flex-start | flex-end | center | space-between | space-stretch; &#125;</code></li>
+<li>属性值：<ul>
+<li>stretch（默认）：轴线占满整个交叉轴</li>
+<li>flex-start：与交叉轴的上沿对齐</li>
+<li>flex-end：与交叉轴的下沿对齐</li>
+<li>center：与交叉轴居中对齐</li>
+<li>space-between：与交叉轴两端对齐，轴线与轴线中间间隔相等</li>
+<li>space-stretch：每条轴线两侧的间距相等（注意轴线与轴线之间的间距比轴线与边框之间的间距大一倍）</li>
+</ul>
+</li>
+<li>效果（对应属性值）：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/315380/1591675142916-6295ea7f-4b69-4f60-825d-faacf38a2a89.png#align=left&display=inline&height=378&margin=%5Bobject%20Object%5D&name=align-content.png&originHeight=378&originWidth=744&size=21451&status=done&style=none&width=744" alt="align-content.png"></p>
+<h3 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h3><ul>
+<li><code>order</code></li>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+<li><code>flex</code></li>
+<li><code>align-self</code></li>
+</ul>
+<p>项目有以上六个属性，下面来详解每个属性：</p>
+<h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><ul>
+<li>说明：该属性定义了项目的排序顺序；数值越小，排列越靠前，可负数，默认为0</li>
+<li>用法：<code>.item &#123; order: 0; &#125;    /* default: 0 */</code></li>
+<li>效果：</li>
+</ul>
+<h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><ul>
+<li>说明：该属性定义了项目的放大比例；基于容器内所有项目根据数值进行比例放大，默认0</li>
+<li>用法：<code>.item &#123; flex-grow: 0; &#125;    /* default: 0 */</code></li>
+<li>效果：</li>
+</ul>
+<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><ul>
+<li>说明：该属性定义了项目的缩小比例；基于容器内所有项目根据数值进行比例缩放，默认1</li>
+<li>用法：<code>.item &#123; flex-shrink: 1; &#125;    /* default: 1 */</code></li>
+<li>效果：</li>
+</ul>
+<h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><ul>
+<li>说明：该属性定义了项目在分配多余空间之前，项目占据的主轴空间；浏览器根据该属性计算项目占据后的主轴的多余空间。占据的空间为项目的本来大小，默认auto</li>
+<li>用法：<code>.item &#123; flex-basis: auto | 数值（同width、height）; &#125;    /* default: auto */</code></li>
+<li>效果：</li>
+</ul>
+<h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><ul>
+<li>说明：该属性为<code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code>三个属性的复合属性；默认0（建议优先使用该属性，而非单独写三个分离的属性，因为浏览器会推算相关值）</li>
+<li>用法：<code>.item &#123; flex: 0 | 1 | auto; &#125;    /* default: 0 */</code></li>
+<li>效果：</li>
+</ul>
+<h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><ul>
+<li>说明：该属性允许单个项目不同于其他项目的对齐方式。可覆盖<code>align-items</code>属性，默认auto，表示继承父元素的<code>align-items</code>属性；如果没有父元素，则效果同于<code>stretch</code>属性</li>
+<li>用法：<code>.item &#123; align-items: auto | stretch | flex-start | flex-end | center | baseline;; &#125;    /* default: auto */</code></li>
+<li>属性值：除<code>auto</code>外，其余属性均与<code>align-items</code>属性一致</li>
+<li>效果：</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>设置Flex布局后，子元素的<code>float</code>、<code>clear</code>、<code>vertical-align</code>属性都将失效</li>
+</ul>
+
+  </div>
+  <div>
+    <a href="https://github.com/jingwei-cai/jingwei-cai.github.io/edit/myblog/source/_posts/Flex.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Flex-%E7%94%A8%E6%B3%95%E5%88%9D%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Flex 用法初解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.0.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFFlex%E5%B8%83%E5%B1%80"><span class="toc-number">1.0.2.</span> <span class="toc-text">什么是Flex布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.0.3.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.4.</span> <span class="toc-text">容器属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-direction"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">flex-direction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-wrap"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">flex-wrap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-flow"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#justify-content"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">justify-content</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-items"><span class="toc-number">1.0.4.5.</span> <span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-content"><span class="toc-number">1.0.4.6.</span> <span class="toc-text">align-content</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.5.</span> <span class="toc-text">项目属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#order"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-grow"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">flex-grow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-shrink"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">flex-shrink</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex-basis"><span class="toc-number">1.0.5.4.</span> <span class="toc-text">flex-basis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#flex"><span class="toc-number">1.0.5.5.</span> <span class="toc-text">flex</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#align-self"><span class="toc-number">1.0.5.6.</span> <span class="toc-text">align-self</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.0.6.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://github.com/jingwei-cai/2020/08/19/Flex/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://github.com/jingwei-cai/2020/08/19/Flex/&text="><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://github.com/jingwei-cai/2020/08/19/Flex/&is_video=false&description="><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: https://github.com/jingwei-cai/2020/08/19/Flex/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://github.com/jingwei-cai/2020/08/19/Flex/&title="><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://github.com/jingwei-cai/2020/08/19/Flex/&name=&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://github.com/jingwei-cai/2020/08/19/Flex/&t="><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    Arun
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects_url">项目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
